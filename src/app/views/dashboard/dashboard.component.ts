@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
     // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
   };
+
   public barChartLabels: Label[] = ['s1ap', 'aupdatelocation', 'asms', 'aainterror', 'iucssccpconnection', 'aimsidetach', 
   'acompoundcall', 'iups', 'acompoundhandover'];
   public barChartType: ChartType = 'bar';
