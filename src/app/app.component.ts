@@ -1,42 +1,20 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  // tslint:disable-next-line
+  selector: 'body',
+  template: '<router-outlet></router-outlet>'
 })
-export class AppComponent {
-  title = 'app';
-
-  serverData: JSON;
-  employeeData: JSON;
-  employee:JSON;
-
-  constructor(private httpClient: HttpClient) {
-  }
+export class AppComponent implements OnInit {
+  constructor(private router: Router) { }
 
   ngOnInit() {
-  }
-
-  sayHi() {
-    this.httpClient.get('http://127.0.0.1:5002/').subscribe(data => {
-      this.serverData = data as JSON;
-      console.log(this.serverData);
-    })
-  }
-
-  getAllEmployees() {
-    this.httpClient.get('http://127.0.0.1:5002/employees').subscribe(data => {
-      this.employeeData = data as JSON;
-      console.log(this.employeeData);
-    })
-  }
-  getEmployee() {
-    this.httpClient.get('http://127.0.0.1:5002/employees/1').subscribe(data => {
-      this.employee = data as JSON;
-      console.log(this.employee);
-    })
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 }
